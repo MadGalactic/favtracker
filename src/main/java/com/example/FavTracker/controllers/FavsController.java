@@ -2,9 +2,7 @@ package com.example.FavTracker.controllers;
 
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @ResponseBody
@@ -27,17 +25,12 @@ public class FavsController{
 
     }
 
-    // TODO: At localhost:8080/form,
-    //  add a form that lets the user enter their name and choose their favorite,
-    //  second favorite, and third favorite programming languages on your list.
-    //  Use select elements for each of the rankings.
-
     @GetMapping("/form")
     public String favForm(){
         return "<html>" +
                 "<body>" +
                 "<form action = '/form' method = 'post'>" + // submit a request to /hello
-                "<input type='text' name='name'>" +
+                "<input type='text' name='name' placeholder='Enter Your Name'>" +
                 "<select name='color' id='color'>" +
                 "<option value='fuchsia'>fuchsia</option>" +
                 "<option value='onyx'>onyx</option>" +
@@ -50,4 +43,19 @@ public class FavsController{
                 "</body>" +
                 "</html>";
     }
+
+    // TODO: Also at localhost:8080/form, use @PostMapping and @RequestParam
+    //  to update the HTML with an h1 stating the user’s name and an ol showing
+    //  the three programming languages in the order they chose.
+
+    @PostMapping("/form")
+    public String greetUser(@RequestParam String name, @RequestParam String color) {
+        if (name == null) {
+            name = "World";
+        }
+        return createMessage(name, color);
+    }
+
+
+
 }
