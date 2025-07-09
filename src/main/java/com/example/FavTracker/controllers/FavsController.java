@@ -37,16 +37,12 @@ public class FavsController{
                 "<option value='indigo'>indigo</option>" +
                 "<option value='scarlet'>scarlet</option>" +
                 "<option value='yellow'>yellow</option>" +
-                "<input type='submit' value='Thanks!'>" +
+                "<input type='submit' value='Enter'>" +
                 "</select>" +
                 "</form>" +
                 "</body>" +
                 "</html>";
     }
-
-    // TODO: Also at localhost:8080/form, use @PostMapping and @RequestParam
-    //  to update the HTML with an h1 stating the user’s name and an ol showing
-    //  the three programming languages in the order they chose.
 
     @PostMapping("/form")
     public String greetUser(@RequestParam String name, @RequestParam String color) {
@@ -56,6 +52,21 @@ public class FavsController{
         return createMessage(name, color);
     }
 
+    public static String createMessage(String n, String l) {
+        String color = "";
 
+        if (l.equals("fuchsia")){
+            color = "fuchsia";
+        } else if (l.equals("onyx")) {
+            color = "onyx";
+        } else if (l.equals("indigo")) {
+            color = "indigo";
+        } else if (l.equals("scarlet")){
+            color = "scarlet";
+        } else if (l.equals("yellow")){
+            color = "yellow";
+        }
+        return n +"'s favorite color is " + color ;
+    }
 
 }
