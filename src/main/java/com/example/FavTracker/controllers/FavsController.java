@@ -47,7 +47,7 @@ public class FavsController{
                 "<option value='salads'>salads</option>" +
                 "</select>" +
                 "<p>My Favorite Hobby:</p>" +
-                "<select name='sports' id='sports'>" +
+                "<select name='hobby' id='sports'>" +
                 "<option value='music'>music</option>" +
                 "<option value='dancing'>dancing</option>" +
                 "<option value='drawing'>drawing</option>" +
@@ -61,6 +61,7 @@ public class FavsController{
                 "</html>";
     }
 
+    @RequestMapping(value="greeting", method = RequestMethod.POST)
     @PostMapping("/form")
     public String greetUser(@RequestParam String name, @RequestParam String color, @RequestParam String food, @RequestParam String hobby) {
         if (name == null) {
@@ -69,8 +70,27 @@ public class FavsController{
         return createMessage(name, color, food, hobby);
     }
 
-    public static String createMessage(String n, String l) {
+//    public static String createMessage(String n, String l) {
+//        String color = "";
+//
+//        if (l.equals("fuchsia")){
+//            color = "fuchsia";
+//        } else if (l.equals("onyx")) {
+//            color = "onyx";
+//        } else if (l.equals("indigo")) {
+//            color = "indigo";
+//        } else if (l.equals("scarlet")){
+//            color = "scarlet";
+//        } else if (l.equals("yellow")){
+//            color = "yellow";
+//        }
+//        return n +"'s favorite color is " + color ;
+//    }
+
+    public static String createMessage(String n, String l, String h, String f) {
         String color = "";
+        String food = "";
+        String hobby = "";
 
         if (l.equals("fuchsia")){
             color = "fuchsia";
@@ -80,12 +100,39 @@ public class FavsController{
             color = "indigo";
         } else if (l.equals("scarlet")){
             color = "scarlet";
-        } else if (l.equals("yellow")){
+        } else {
             color = "yellow";
         }
-        return n +"'s favorite color is " + color ;
+
+        if (f.equals("pasta")){
+            food = "pasta";
+        } else if (f.equals("sushi")) {
+            food = "sushi";
+        } else if (f.equals("tacos")) {
+            food = "tacos";
+        } else if (f.equals("dumplings")){
+            food = "dumplings";
+        } else {
+            food = "salads";
+        }
+
+        if (h.equals("music")){
+            hobby = "music";
+        } else if (h.equals("dancing")) {
+            hobby = "dancing";
+        } else if (h.equals("drawing")) {
+            hobby = "drawing";
+        } else if (h.equals("skateboarding")){
+            hobby = "skateboarding";
+        } else {
+            hobby = "cooking";
+        }
+
+        return  n + "\n" +"1." + color + "\n" + "2." + food + "\n" + "3." + hobby;
+
     }
 
     // TODO: finish building conditionals
+
 
 }
