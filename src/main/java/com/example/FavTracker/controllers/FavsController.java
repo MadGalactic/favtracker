@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @ResponseBody
-@RequestMapping
+//@RequestMapping
 public class FavsController{
 
     @GetMapping("/")
@@ -27,7 +27,7 @@ public class FavsController{
     public String favForm(){
         return "<html>" +
                 "<body>" +
-                "<form action = '/form' method = 'post'>" + // submit a request to /hello
+                "<form action = '/greeting' method = 'post'>" +
                 "<h2>Name:</h2>" +
                 "<input type='text' name='name' placeholder='Enter Your Name'>" +
                 "<p>My Favorite Color:</p>" +
@@ -61,8 +61,15 @@ public class FavsController{
                 "</html>";
     }
 
-    @RequestMapping(value="greeting", method = RequestMethod.POST)
-    @PostMapping("/form")
+//    @PostMapping("/form")
+//    public String greetUser(@RequestParam String name, @RequestParam String color, @RequestParam String food, @RequestParam String hobby) {
+//        if (name == null) {
+//            name = "World";
+//        }
+//        return createMessage(name, color, food, hobby);
+//    }
+
+    @RequestMapping(value="greeting", method = {RequestMethod.GET, RequestMethod.POST})
     public String greetUser(@RequestParam String name, @RequestParam String color, @RequestParam String food, @RequestParam String hobby) {
         if (name == null) {
             name = "World";
@@ -88,9 +95,9 @@ public class FavsController{
 //    }
 
     public static String createMessage(String n, String l, String h, String f) {
-        String color = "";
-        String food = "";
-        String hobby = "";
+        String color;
+        String food;
+        String hobby;
 
         if (l.equals("fuchsia")){
             color = "fuchsia";
@@ -128,11 +135,22 @@ public class FavsController{
             hobby = "cooking";
         }
 
-        return  n + "\n" +"1." + color + "\n" + "2." + food + "\n" + "3." + hobby;
+        // return  n + "\n" +"1." + color + "\n" + "2." + food + "\n" + "3." + hobby;
+        return  "<html>" +
+                "<body>"+
+                "<h1>" + n + "</h1>" +
+                "<ol>" +
+                "<li>" + l + "</li>" +
+                "<li>" + f + "</li>" +
+                "<li>" + h + "</li>" +
+                "</ol>" +
+                "</body>" +
+                "<html>";
+
 
     }
 
-    // TODO: finish building conditionals
+
 
 
 }
